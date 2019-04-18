@@ -12,12 +12,14 @@ I created a CloudFormation template to automate the creation of an RDS Aurora My
 
     This will launch the AWS CloudFormation Console, passing in the template, create a new stack, and automate the creation of an Aurora Serverless Cluster, database, and Lambda function.
 2.	Click **Next** on the Select Template page
-3.	Click **Next**
-4.	On the Options page, leave all the defaults and click **Next**
-5.	On the Review page, check the box to acknowledge that CloudFormation will create IAM resources and click **Create**.
-6.	Wait for the *my-serverless-cluster* stack to reach a status of CREATE_COMPLETE
-7.	With the my-serverless-cluster-stack selected, **click on the Outputs tab** and you should see three rows.
+3.  Provide a Database name (e.g. MarketPlace) and a master username/password for connection to your serverless instance.
+ ![Stack Output](https://s3.amazonaws.com/cloudformation-templates-useast-1/rds-aurora-serverless/stack-parmeters.png "CloudFormation Stack Parameters")
+4.	Click **Next**
+5.	On the Options page, leave all the defaults and click **Next**
+6.	On the Review page, check the box to acknowledge that CloudFormation will create IAM resources and click **Create**.
+7.	Wait for the *my-serverless-cluster* stack to reach a status of CREATE_COMPLETE
+8.	With the my-serverless-cluster-stack selected, **click on the Outputs tab** and you should see three rows.
  ![Stack Output](https://s3.amazonaws.com/cloudformation-templates-useast-1/rds-aurora-serverless/cf-output.png "CloudFormation Stack Output of Cognito Identity Pool details")
-8.	Copy the Value for each of the three resources as we’ll be pasting those values into AWS CLI command for executing CRUD operations agains the serverless database.
+9. Copy the Value for each of the three resources as we’ll be pasting those values into AWS CLI command for executing CRUD operations agains the serverless database.
 
 ## Enable Data API - Aurora Serverless Database
