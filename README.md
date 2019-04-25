@@ -1,7 +1,7 @@
 # Getting Started with Amazon RDS Aurora Serverless Data API
 Getting started with Amazon RDS Aurora (MySQL) Serverless with Data API for building cloud enabled serverless backends for mobile and web applications.
 
-If you want to learn a bit more about Aurora Server Data API, checkout my blog and video:
+If you want to learn a bit more about Aurora Server Data API, checkout my blog and video: 
 
 <BLOG LINK HERE>
 <YouTube Video Embed HERE>
