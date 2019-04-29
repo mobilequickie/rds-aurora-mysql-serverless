@@ -1,38 +1,35 @@
 # Getting Started with Amazon RDS Aurora Serverless Data API
 Getting started with Amazon RDS Aurora (MySQL) Serverless with Data API for building cloud enabled serverless backends for mobile and web applications.
 
-If you want to learn a bit more about Aurora Server Data API, checkout my blog and video: 
+If you want to learn a bit more about Aurora Serverless Data API, checkout my getting started blog [here](https://read.acloud.guru/getting-started-with-the-amazon-aurora-serverless-data-api-6b84e466b109). 
 
-<BLOG LINK HERE>
-<YouTube Video Embed HERE>
+In this repo, I have uploaded a one-click CloudFormation template that will deploy all the resources necessary to build a Serverless Aurora MySQL database and provided manual steps to enable the Data API and connect to this serverless database via an AWS Lambda function using the [RDSDataService API](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/RDSDataService.html).
 
-The video will briefly go over Aurora Serverless and the new Data API but the real meat is about demonstrating the three (3) ways to deploy a new Aurora (MySQL) serverless database with Data API and exploring the four (4) ways to connect to your Aurora Serverless Data API enabled database.
+In this solution below, we'll create resources using a CloudFormation template that does the following:
 
-If you don't care about the details or have already read/watched the solution, here's how you can get started quickly deploying your Aurora Cluster and enabling the Data API. In this solution below, we'll use a CloudFormation template that does the following:
+* Creates a new RDS **Aurora Serverless Cluster**
 
-[] Create a new RDS Aurora Serverless Cluster
+* Creates a **blank database** within the newly creted cluster
+* Creates an **AWS Secrets** to store the master user credentials for connecting to the serverless database
 
-[] Creates a blank database within the cluster
-[] Creates an AWS Secrets to store the master user credentials for connecting to the database
+* Creates a new **AWS Lambda function** (Node.js) with three environment variables (database name, cluster arn, and secrets arn) for connecting directly to your serverless database and making SQL statements through HTTP requests
 
-[] Deploys a new AWS Lambda function with three environment variables (database name, cluster arn, and secrets arn) for connecting directly to your serverless database
+* Creates a **Lambda IAM execution role** with permissions for the Lambda function to make CRUD operations against an Aurora Serverless database, read-only of AWS Secrets for getting the master credentials, and logging to CloudWatch Logs.
 
-[] Creates a Lambda execution role with permissions to the make CRUD operations against Aurora Serverless database, AWS Secrets for getting the master credentials, and logging to CloudWatch Logs.
-
-Note: The CloudFormation template does not currently enable the "Data API" for the created Aurora Serverless Cluster as this feature is currently in BETA and the only way to enable Data API is through the RDS management console. See step 2 to enable the Data API manually after the Cloudformation Stack completes.
+*Note*: The CloudFormation template does not currently enable the "Data API" for the created Aurora Serverless Cluster as this feature is currently in BETA. The only (feasable) way to enable Data API is through the RDS management console. See step 2 to enable the Data API manually after the Cloudformation Stack completes.
 
 ## Step 1: Create an Aurora Serverless Database via CloudFormation
 This CloudFormation template automates the creation of an RDS Aurora MySQL Serverless Cluster, an AWS Secrets for storing the cluster master account credentials, an AWS Lambda function used to make CRUD operations directly against your serverless database, and all the permission needed.
 
-Once the stack completes, see the Output tab for the Aurora Cluster Arn and Secrets Arn which will be used to for connecting to the database via the AWS CLI, SDK, or Lambda. Please note that these arn's are alos available as environment variables for the deployed Lambda function.
+Once the stack completes, see the **Output tab** for the Aurora Cluster Arn and Secrets Arn which will be used to for connecting to the database via the AWS CLI, SDK, or Lambda. Please note that these arn's will also automatically made available as environment variables for the deployed Lambda function.
 
-### GET STARTED
+## ⚡️ Getting Started
 
-1. Click on the Launch Stack button to start provision your new Aurora MySQL Serverless Database.
+1. Click on the Launch Stack button to start provisioning your new Aurora MySQL Serverless Database (defaults to us-east-1 region).
     
     [![Launch Stack](https://s3-us-west-2.amazonaws.com/mobilequickie/speechtranslator/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=my-serverless-cluster&templateURL=https://s3.amazonaws.com/cloudformation-templates-useast-1/rds-aurora-serverless/rds-aurora-serverless.yml)
 
-    This will launch the AWS CloudFormation Console, passing in the template, create a new stack, and automate the creation of an Aurora Serverless Cluster, database, and Lambda function.
+    This will launch the AWS CloudFormation Console, passing in the template, create a new stack, and automate the creation of an Aurora Serverless Cluster, database, Lambda function, and IAM role.
 
 2.	Click **Next** on the Select Template page
 3.  Provide a Database name (e.g. MarketPlace) and a master username/password for connecting to your serverless instance.
@@ -59,5 +56,14 @@ Here we are going to enable the Data API for the newly created Aurora serverless
 ![](https://s3.amazonaws.com/cloudformation-templates-useast-1/rds-aurora-serverless/enable-data-api-animated.gif)
 
 Congrats! The Aurora Serverless Cluster is now Data API enabled.
+
+## 📝 Notes about Data API and support
+* The Data API can only be enabled for Aurora Serverless databases
+* Aurora Serverless **Data API** is currently in BETA (as of April 29, 2019)
+* Aurora Serverless **Data API** is currently in BETA (as of April 29, 2019)
+* Aurora Serverless **Data API** is only available in the us-east-1 (N. Virginia) region (as of April 29, 2019).
+* The Lambda function deployed via this CloudFormation template invokes the RDSDataService API that is not currently built into the default Node.js SDK support from Lambda so you need to build via NPM, zip the package and upload to Lambda. (as of April 29, 2019)
+
+I'll try to keep this update as things change above.
 
 
