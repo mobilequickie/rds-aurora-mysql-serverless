@@ -47,11 +47,11 @@ Here we are going to enable the Data API for the newly created Aurora serverless
 
 1. Launch the [RDS Management Console](https://console.aws.amazon.com/rds/home?region=us-east-1#databases:)
 2. Select your cluster (even though it says database)
-3. Select the Modify button on the upper right
-4. Select "Data API" under the Network & Security section
-5. Click orange "Continue" button
-6. Select "Apply immediately" under Scheduling of modifications
-7. Select "Modify cluster" button
+3. Select the `Modify` button on the upper right
+4. Select `Data API` under the Network & Security section
+5. Click orange `Continue` button
+6. Select `Apply immediately` under Scheduling of modifications
+7. Select `Modify cluster` button
 
 ![](https://s3.amazonaws.com/cloudformation-templates-useast-1/rds-aurora-serverless/enable-data-api-animated.gif)
 
@@ -59,10 +59,9 @@ Congrats! The Aurora Serverless Cluster is now Data API enabled.
 
 ## 📝 Notes about Data API and support
 * The Data API can only be enabled for Aurora Serverless databases
-* Aurora Serverless **Data API** is currently in BETA (as of April 29, 2019)
-* Aurora Serverless **Data API** is currently in BETA (as of April 29, 2019)
-* Aurora Serverless **Data API** is only available in the us-east-1 (N. Virginia) region (as of April 29, 2019).
-* The Lambda function deployed via this CloudFormation template invokes the RDSDataService API that is not currently built into the default Node.js SDK support from Lambda so you need to build via NPM, zip the package and upload to Lambda. (as of April 29, 2019)
+* Aurora Serverless **Data API** is currently in BETA (as of May 8, 2019)
+* Aurora Serverless **Data API** is only available in the us-east-1 (N. Virginia) region (as of May 8, 2019).
+* The Lambda function deployed via this CloudFormation template invokes the RDSDataService API that is not currently built into the default Node.js SDK support from Lambda so you need to build via NPM, zip the package and upload to Lambda. (as of May 8, 2019)
 
 I'll try to keep this update as things change above.
 
